@@ -34,10 +34,15 @@ export async function getStaticProps() {
     Tags: val[4]
       .split(",")
       .filter((val: string | any[]) => val.length < 10)
+      .map((val: string) => val.replace(/[\])}[{(]/g, "").trim())
       .splice(0, 5),
     Deadline:
       val[5] != "?"
-        ? dateParse(val[5]).toLocaleString().split(",")[0]
+        ? dateParse(val[5]).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
         : "No Date",
     DeadlinePassed: val[5] != "?" ? stringParse(dateParse(val[5])) : false,
     Link: val[6].split('"')[1],
@@ -118,49 +123,61 @@ const Home: NextPage<HomeProps> = (props) => {
 
   return (
     <main>
-    <Head>
-      <title>Kazakhstan IT Internships</title>
-    </Head>
-    <div className="flex flex-col justify-center">
-      <div className="flex flex-col justify-center mx-auto  max-w-2xl">
-        <div className="flex flex-col items-center scroll-mt-24 pt-8">
-          <h1 className="font-bold text-3xl md:text-5xl tracking-tight text-center mb-1 text-transparent bg-clip-text bg-gradient-to-r p-1 from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]">
-            Kazakhstan IT Internships
-          </h1>
-          <p className="max-w-xl mt-5 text-md">
-            list based on <a className="text-[#3B82F6]" href="https://github.com/danabeknar/kazakhstan-it-internships">this repo</a>.
-            Items with border are still active. Green Icon means it is paid. Made using Next.js ISR.
-          </p>
-        </div>
-        <ul className="flex flex-col cursor-pointer	">
-          {jobs.map((value, id) => {
-            return (
-              <div  key={id} className={value.DeadlinePassed ? "" : "rounded-xl bg-gradient-to-r p-1 from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]"}>
-              <Link href={value.Link}>
+      <Head>
+        <title>Kazakhstan IT Internships</title>
+      </Head>
+      <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center mx-auto  max-w-2xl">
+          <div className="flex flex-col items-center scroll-mt-24 pt-8">
+            <h1 className="font-bold text-3xl md:text-5xl tracking-tight p-5 text-transparent bg-clip-text bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]">
+              Kazakhstan IT Internships
+            </h1>
+            <p className="p-5 text-sm md:text-xl text-left">
+              list is from{" "}
+              <a
+                className="text-[#3B82F6]"
+                href="https://github.com/danabeknar/kazakhstan-it-internships"
+              >
+                this repo
+              </a>
+              . Made using Next.js ISR.
+            </p>
+          </div>
+          <ul className="flex flex-col cursor-pointer	">
+            {jobs.map((value, id) => {
+              return (
                 <div
-                  className="flex flex-wrap bg-white rounded-xl p-5 hover:text-[#3B82F6]"
+                  key={id}
+                  className={
+                    value.DeadlinePassed
+                      ? ""
+                      : "rounded-xl bg-gradient-to-r p-1 from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]"
+                  }
                 >
-                  <div className="w-1/2 p-2 font-bold text-3xl">{value.Name}</div>
-                  <div className="w-1/2 p-2">
-                    <Tags items={value.Tags} />
-                  </div>
-                  <div className="w-1/2 p-2  text-left flex items-center gap-2">
-                    <LocationIcon /> {value.Location} {value.Paid ? <DollarIcon /> : <></>}
-                  </div>
-                  <div className="w-1/2 p-2 text-right">
-                    Deadline: {value.Deadline}
-                  </div>
+                  <Link href={value.Link}>
+                    <div className="flex flex-wrap bg-white rounded-xl p-2 hover:text-[#3B82F6]">
+                      <div className="w-1/2 p-2 font-bold text-3xl">
+                        {value.Name}
+                      </div>
+                      <div className="w-1/2 p-2">
+                        <Tags items={value.Tags} />
+                      </div>
+                      <div className="w-1/2 p-2  text-left flex items-center gap-2">
+                        <LocationIcon /> {value.Location}{" "}
+                        {value.Paid ? <DollarIcon /> : <></>}
+                      </div>
+                      <div className="w-1/2 p-2 text-right">
+                        Deadline: {value.Deadline}
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-              </div>
-            );
-          })}
-        </ul>
-        <Footer/>
-
+              );
+            })}
+          </ul>
+          <Footer />
+        </div>
       </div>
-
-    </div>
     </main>
   );
 };

@@ -54,7 +54,7 @@ export async function getStaticProps() {
     props: {
       jobs,
     },
-    revalidate: 86400, // 86400
+    revalidate: 1, // 86400
   };
 }
 
@@ -77,7 +77,7 @@ function Tags(props: { items: string[] }) {
   return (
     <div className="flex-wrap justify-end hidden ml-2 text-right md:flex">
       {props.items.map((tag, index) => (
-        <p className="text-xs  mx-2" key={index}>
+        <p className="text-xs mx-2" key={index}>
           #{tag}
         </p>
       ))}
@@ -130,7 +130,9 @@ const Home: NextPage<HomeProps> = (props) => {
         <div className="flex flex-col justify-center mx-auto  max-w-2xl">
           <div className="flex flex-col scroll-mt-24 pt-8">
             <h1 className="font-bold text-3xl md:text-6xl tracking-tight p-5">
-              Kazakhstan 🇰🇿<br/>IT Internships
+              Kazakhstan 🇰🇿
+              <br />
+              IT Internships
             </h1>
             <p className="p-5 text-sm md:text-xl tracking-tight ">
               list is from{" "}
@@ -140,12 +142,15 @@ const Home: NextPage<HomeProps> = (props) => {
               >
                 this repo
               </a>
-              . Made using Next.js ISR. 
-              <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Highlighted</span> items are not past deadline. <br/>
-              <p className="flex flex-row items-center gap-2"> 
+              . Made using Next.js ISR.
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                Highlighted
+              </span>{" "}
+              items are not past deadline. <br />
+              <span className="flex flex-row items-center gap-2">
                 This icon <DollarIcon /> means it is paid.
-              </p>
+              </span>
             </p>
           </div>
           <div className="flex flex-col cursor-pointer ">
@@ -155,8 +160,8 @@ const Home: NextPage<HomeProps> = (props) => {
                   key={id}
                   className={
                     value.DeadlinePassed
-                      ? "p-1 rounded-xl bg-gray-100 my-1"
-                      : "rounded-xl bg-gradient-to-r p-1 my-1 from-indigo-500 via-purple-500 to-pink-500"
+                      ? "p-1 rounded-xl bg-gray-100 my-1 sm:mx-0 mx-5"
+                      : "rounded-xl bg-gradient-to-r p-1 my-1 sm:mx-0 mx-5 from-indigo-500 via-purple-500 to-pink-500"
                   }
                 >
                   <Link href={value.Link}>

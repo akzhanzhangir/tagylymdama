@@ -128,34 +128,39 @@ const Home: NextPage<HomeProps> = (props) => {
       </Head>
       <div className="flex flex-col justify-center">
         <div className="flex flex-col justify-center mx-auto  max-w-2xl">
-          <div className="flex flex-col items-center scroll-mt-24 pt-8">
-            <h1 className="font-bold text-3xl md:text-5xl tracking-tight p-5 text-transparent bg-clip-text bg-gradient-to-r from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]">
-              Kazakhstan IT Internships
+          <div className="flex flex-col scroll-mt-24 pt-8">
+            <h1 className="font-bold text-3xl md:text-6xl tracking-tight p-5">
+              Kazakhstan 🇰🇿<br/>IT Internships
             </h1>
-            <p className="p-5 text-sm md:text-xl text-left">
+            <p className="p-5 text-sm md:text-xl tracking-tight ">
               list is from{" "}
               <a
-                className="text-[#3B82F6]"
+                className="text-blue-500"
                 href="https://github.com/danabeknar/kazakhstan-it-internships"
               >
                 this repo
               </a>
-              . Made using Next.js ISR.
+              . Made using Next.js ISR. 
+              <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Highlighted</span> items are not past deadline. <br/>
+              <p className="flex flex-row items-center gap-2"> 
+                This icon <DollarIcon /> means it is paid.
+              </p>
             </p>
           </div>
-          <ul className="flex flex-col cursor-pointer	">
+          <div className="flex flex-col cursor-pointer ">
             {jobs.map((value, id) => {
               return (
                 <div
                   key={id}
                   className={
                     value.DeadlinePassed
-                      ? ""
-                      : "rounded-xl bg-gradient-to-r p-1 from-[#6EE7B7] via-[#3B82F6] to-[#9333EA]"
+                      ? "p-1 rounded-xl bg-gray-100 my-1"
+                      : "rounded-xl bg-gradient-to-r p-1 my-1 from-indigo-500 via-purple-500 to-pink-500"
                   }
                 >
                   <Link href={value.Link}>
-                    <div className="flex flex-wrap bg-white rounded-xl p-2 hover:text-[#3B82F6]">
+                    <div className="flex flex-wrap bg-white rounded-xl p-2 hover:text-blue-500">
                       <div className="w-1/2 p-2 font-bold text-3xl">
                         {value.Name}
                       </div>
@@ -174,7 +179,7 @@ const Home: NextPage<HomeProps> = (props) => {
                 </div>
               );
             })}
-          </ul>
+          </div>
           <Footer />
         </div>
       </div>

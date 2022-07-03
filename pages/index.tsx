@@ -43,7 +43,7 @@ export async function getStaticProps() {
       .map((val: string) => val.replace(/[\])}[{(]/g, "").trim())
       .splice(0, 5),
     Deadline:
-      val[5] != "?" ? dateParse(val[5]).toLocaleDateString() : "No Date",
+      val[5] != "?" ? dateParse(val[5]).toLocaleDateString('de-DE') : "No Date",
     DeadlinePassed: val[5] != "?" ? stringParse(dateParse(val[5])) : false,
     Link: val[6].split('"')[1],
   }));
@@ -142,14 +142,14 @@ const Home: NextPage<HomeProps> = (props) => {
             >
               this repo
             </a>
-            . Made using Next.js ISR.
+            . made using next.js ISR.
             <br />
             <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Highlighted
+              highlighted
             </span>{" "}
-            items are not past deadline. <br />
+            items aren&apos;t past deadline. <br />
             <span className="flex flex-row items-center gap-2">
-              This icon <DollarIcon /> means it is paid.
+              dollar icon <DollarIcon /> means it is paid.
             </span>
           </p>
         </div>
@@ -186,8 +186,8 @@ const Home: NextPage<HomeProps> = (props) => {
               </div>
             );
           })}
-          <footer className="mt-5 h-10  p-4 text-black dark:text-white">
-            <Link href="https://github.com/djakish"> my github </Link>
+          <footer className="m-6 text-black dark:text-white">
+            <Link href="https://github.com/djakish"> my github. </Link> 
           </footer>
         </div>
       </div>

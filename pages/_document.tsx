@@ -15,11 +15,14 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           <meta name="description" content="IT/CS/SE Стажировки в Казахстане" />
           <meta property="og:title" content="Казахстан IT Стажировки" />
-          <meta property="og:description" content="IT/CS/SE Стажировки в Казахстане" />
+          <meta
+            property="og:description"
+            content="IT/CS/SE Стажировки в Казахстане"
+          />
           <meta property="og:url" content="https://tagylymdama.vercel.app/" />
           <meta property="og:type" content="website" />
         </Head>
-        <body>
+        <body className="bg-white dark:bg-black scroll-smooth">
           <Main />
           <NextScript />
         </body>

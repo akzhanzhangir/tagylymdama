@@ -1,7 +1,10 @@
-import Footer from "../components/Footer";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+
+function cn(...classes: (string | undefined | null | false)[]) {
+  return classes.filter(Boolean).join(" ");
+}
 
 function dateParse(date: string) {
   const [day, month, year] = date.split(".");
@@ -18,7 +21,10 @@ export async function getStaticProps() {
 
   // Fetching Readme
   const res = await fetch(
-    "https://raw.githubusercontent.com/danabeknar/kazakhstan-it-internships/main/README.md"
+    "https://raw.githubusercontent.com/danabeknar/kazakhstan-it-internships/main/README.md",
+    {
+      method: 'GET',
+    }
   );
   const awaited = await res.text();
 
@@ -37,13 +43,7 @@ export async function getStaticProps() {
       .map((val: string) => val.replace(/[\])}[{(]/g, "").trim())
       .splice(0, 5),
     Deadline:
-      val[5] != "?"
-        ? dateParse(val[5]).toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        : "No Date",
+      val[5] != "?" ? dateParse(val[5]).toLocaleDateString() : "No Date",
     DeadlinePassed: val[5] != "?" ? stringParse(dateParse(val[5])) : false,
     Link: val[6].split('"')[1],
   }));
@@ -54,7 +54,7 @@ export async function getStaticProps() {
     props: {
       jobs,
     },
-    revalidate: 1, // 86400
+    revalidate: 86400, // 86400
   };
 }
 
@@ -75,9 +75,9 @@ interface HomeProps {
 
 function Tags(props: { items: string[] }) {
   return (
-    <div className="flex-wrap justify-end hidden ml-2 text-right md:flex">
+    <div className="hidden flex-wrap justify-end gap-2 text-right md:flex">
       {props.items.map((tag, index) => (
-        <p className="text-xs mx-2" key={index}>
+        <p className="text-xs" key={index}>
           #{tag}
         </p>
       ))}
@@ -126,66 +126,69 @@ const Home: NextPage<HomeProps> = (props) => {
       <Head>
         <title>Kazakhstan IT Internships</title>
       </Head>
-      <div className="flex flex-col justify-center">
-        <div className="flex flex-col justify-center mx-auto  max-w-2xl">
-          <div className="flex flex-col scroll-mt-24 pt-8">
-            <h1 className="font-bold text-3xl md:text-6xl tracking-tight p-5">
-              Kazakhstan 🇰🇿
-              <br />
-              IT Internships
-            </h1>
-            <p className="p-5 text-sm md:text-xl tracking-tight ">
-              list is from{" "}
-              <a
-                className="text-blue-500"
-                href="https://github.com/danabeknar/kazakhstan-it-internships"
+
+      <div className="mx-auto max-w-2xl">
+        <div className="flex flex-col pt-4 sm:pt-8">
+          <h1 className="px-5 py-2 text-3xl font-bold tracking-tight dark:text-white md:text-6xl">
+            Kazakhstan 🇰🇿
+            <br />
+            IT Internships
+          </h1>
+          <p className="px-5 py-2 text-sm tracking-tight dark:text-white md:text-xl">
+            list is from{" "}
+            <a
+              className="text-blue-500"
+              href="https://github.com/danabeknar/kazakhstan-it-internships"
+            >
+              this repo
+            </a>
+            . Made using Next.js ISR.
+            <br />
+            <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Highlighted
+            </span>{" "}
+            items are not past deadline. <br />
+            <span className="flex flex-row items-center gap-2">
+              This icon <DollarIcon /> means it is paid.
+            </span>
+          </p>
+        </div>
+        <div className="flex cursor-pointer flex-col dark:text-white">
+          {jobs.map((value, id) => {
+            return (
+              <div
+                key={id}
+                className={cn(
+                  value.DeadlinePassed
+                    ? "bg-gray-100 dark:bg-gray-700"
+                    : "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
+                  "my-2 mx-5  rounded-xl p-1 sm:mx-0"
+                )}
               >
-                this repo
-              </a>
-              . Made using Next.js ISR.
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                Highlighted
-              </span>{" "}
-              items are not past deadline. <br />
-              <span className="flex flex-row items-center gap-2">
-                This icon <DollarIcon /> means it is paid.
-              </span>
-            </p>
-          </div>
-          <div className="flex flex-col cursor-pointer ">
-            {jobs.map((value, id) => {
-              return (
-                <div
-                  key={id}
-                  className={
-                    value.DeadlinePassed
-                      ? "p-1 rounded-xl bg-gray-100 my-1 sm:mx-0 mx-5"
-                      : "rounded-xl bg-gradient-to-r p-1 my-1 sm:mx-0 mx-5 from-indigo-500 via-purple-500 to-pink-500"
-                  }
-                >
-                  <Link href={value.Link}>
-                    <div className="flex flex-wrap bg-white rounded-xl p-2 hover:text-blue-500">
-                      <div className="w-1/2 p-2 font-bold text-3xl">
-                        {value.Name}
-                      </div>
-                      <div className="w-1/2 p-2">
-                        <Tags items={value.Tags} />
-                      </div>
-                      <div className="w-1/2 p-2  text-left flex items-center gap-2">
-                        <LocationIcon /> {value.Location}{" "}
-                        {value.Paid ? <DollarIcon /> : <></>}
-                      </div>
-                      <div className="w-1/2 p-2 text-right">
-                        Deadline: {value.Deadline}
-                      </div>
+                <Link href={value.Link}>
+                  <div className="flex flex-wrap rounded-xl bg-white p-2 hover:text-blue-500 dark:bg-black ">
+                    <div className="w-full p-2 text-2xl font-bold tracking-[-.075em] sm:w-1/2 sm:text-3xl">
+                      {value.Name}
                     </div>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-          <Footer />
+                    <div className="w-0 p-0 sm:w-1/2 sm:p-2">
+                      <Tags items={value.Tags} />
+                    </div>
+                    <div className="flex w-1/2 items-center gap-2 p-2  text-sm sm:text-base ">
+                      <LocationIcon />{" "}
+                      <span className="truncate">{value.Location}</span>
+                      {value.Paid ? <DollarIcon /> : <></>}
+                    </div>
+                    <div className="w-1/2 p-2 text-right  text-sm sm:text-base">
+                      {value.Deadline}
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+          <footer className="mt-5 h-10  p-4 text-black dark:text-white">
+            <Link href="https://github.com/djakish"> my github </Link>
+          </footer>
         </div>
       </div>
     </main>

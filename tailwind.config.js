@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      'sans': ['Spline Sans Mono']
+      sans: ["Spline Sans Mono"],
     },
   },
   plugins: [],
-}
+};

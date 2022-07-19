@@ -48,7 +48,6 @@ export async function getStaticProps() {
     Link: val[6].split('"')[1],
   }));
 
-  jobs.reverse();
 
   return {
     props: {

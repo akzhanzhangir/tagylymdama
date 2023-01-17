@@ -34,7 +34,7 @@ export async function getStaticProps() {
 
   const jobs: Job[] = result.map((val: any[]) => ({
     Name: val[0],
-    Internship: val[1],
+    Internship: val[1].match(/\>(.*?)\</)[1],
     Location: val[2] == "?" ? "No Location" : val[2],
     Paid: val[3] == "+" ? true : false,
     Tags: val[4]
@@ -45,7 +45,7 @@ export async function getStaticProps() {
     Deadline:
       val[5] != "?" ? dateParse(val[5]).toLocaleDateString('de-DE') : "No Date",
     DeadlinePassed: val[5] != "?" ? stringParse(dateParse(val[5])) : false,
-    Link: val[6].split('"')[1],
+    Link: val[1].split('"')[1],
   }));
 
 
@@ -159,14 +159,14 @@ const Home: NextPage<HomeProps> = (props) => {
                 key={id}
                 className={cn(
                   value.DeadlinePassed
-                    ? "bg-gray-100 dark:bg-gray-700"
-                    : "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
-                  "my-2 mx-5  rounded-xl p-1 sm:mx-0"
+                    ? "bg-gray-100 dark:bg-gray-700 hover:bg-blue-500"
+                    : "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:bg-blue-500",
+                  "transition-all duration-500 my-2 mx-5  rounded-xl p-1 sm:mx-0 hover:text-blue-500"
                 )}
               >
                 <Link href={value.Link}>
-                  <div className="flex flex-wrap rounded-xl bg-white p-2 hover:text-blue-500 dark:bg-black ">
-                    <div className="w-full p-2 text-2xl font-bold tracking-[-.075em] sm:w-1/2 sm:text-3xl">
+                  <div className="flex flex-wrap rounded-xl bg-white p-2  dark:bg-black ">
+                    <div className="w-full p-2 text-2xl font-bold  sm:w-1/2 sm:text-3xl">
                       {value.Name}
                     </div>
                     <div className="w-0 p-0 sm:w-1/2 sm:p-2">

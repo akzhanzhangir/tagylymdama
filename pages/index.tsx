@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { Martian_Mono } from 'next/font/google'
 
 function cn(...classes: (string | undefined | null | false)[]) {
   return classes.filter(Boolean).join(" ");
@@ -117,6 +118,9 @@ function LocationIcon() {
   );
 }
 
+ 
+const martian = Martian_Mono({ subsets: ['latin'] })
+
 const Home: NextPage<HomeProps> = (props) => {
   const { jobs } = props;
 
@@ -126,29 +130,36 @@ const Home: NextPage<HomeProps> = (props) => {
         <title>Kazakhstan IT Internships</title>
       </Head>
 
-      <div className="mx-auto max-w-2xl">
+      <div className={martian.className + " mx-auto max-w-2xl"}>
         <div className="flex flex-col pt-4 sm:pt-8">
-          <h1 className="px-5 py-2 text-3xl font-bold tracking-tight dark:text-white md:text-6xl">
+          <h1 className="font-display px-5 py-2 text-3xl font-bold tracking-tight dark:text-white md:text-6xl">
             Kazakhstan 🇰🇿
             <br />
             IT Internships
           </h1>
           <p className="px-5 py-2 text-sm tracking-tight dark:text-white md:text-xl">
-            list is from{" "}
+           <div>
+           List is from{" "}
             <a
               className="text-blue-500"
               href="https://github.com/danabeknar/kazakhstan-it-internships"
             >
-              this repo
+              this repo.
             </a>
-            . made using next.js ISR.
-            <br />
+            <div>
+            Made using next.js ISR. 
+
+            </div>
+           </div>
+            <div>
             <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              highlighted
+              HIGHLIGHTED
             </span>{" "}
-            items aren&apos;t past deadline. <br />
+            items aren&apos;t past the deadline.
+            </div>
+
             <span className="flex flex-row items-center gap-2">
-              dollar icon <DollarIcon /> means it is paid.
+              Dollar icon <DollarIcon /> means it is paid.
             </span>
           </p>
         </div>

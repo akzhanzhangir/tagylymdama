@@ -118,7 +118,7 @@ function LocationIcon() {
   );
 }
 
- 
+
 const martian = Martian_Mono({ subsets: ['latin'] })
 
 const Home: NextPage<HomeProps> = (props) => {
@@ -129,7 +129,6 @@ const Home: NextPage<HomeProps> = (props) => {
       <Head>
         <title>Kazakhstan IT Internships</title>
       </Head>
-
       <div className={martian.className + " mx-auto max-w-2xl"}>
         <div className="flex flex-col pt-4 sm:pt-8">
           <h1 className="font-display px-5 py-2 text-3xl font-bold tracking-tight dark:text-white md:text-6xl">
@@ -137,31 +136,27 @@ const Home: NextPage<HomeProps> = (props) => {
             <br />
             IT Internships
           </h1>
-          <p className="px-5 py-2 text-sm tracking-tight dark:text-white md:text-xl">
-           <div>
-           List is from{" "}
-            <a
-              className="text-blue-500"
-              href="https://github.com/danabeknar/kazakhstan-it-internships"
-            >
-              this repo.
-            </a>
-            <div>
-            Made using next.js ISR. 
-
-            </div>
-           </div>
-            <div>
-            <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              HIGHLIGHTED
-            </span>{" "}
-            items aren&apos;t past the deadline.
-            </div>
-
-            <span className="flex flex-row items-center gap-2">
+          <div className="px-5 py-2 text-sm tracking-tight dark:text-white md:text-xl">
+            <p>
+              Links are from{" "}
+              <a
+                className="text-blue-500"
+                href="https://github.com/danabeknar/kazakhstan-it-internships"
+              > this repo. </a>
+            </p>
+            <p>
+              Made using next.js ISR.
+            </p>
+            <p>
+              <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                HIGHLIGHTED
+              </span>{" "}
+              items aren&apos;t past the deadline.
+            </p>
+            <p className="flex flex-row items-center gap-2">
               Dollar icon <DollarIcon /> means it is paid.
-            </span>
-          </p>
+            </p>
+          </div>
         </div>
         <div className="flex cursor-pointer flex-col dark:text-white">
           {jobs.map((value, id) => {
@@ -197,7 +192,7 @@ const Home: NextPage<HomeProps> = (props) => {
             );
           })}
           <footer className="m-6 text-black dark:text-white">
-            <Link href="https://github.com/djakish"> my github. </Link> 
+            <Link href="https://github.com/djakish"> my github. </Link>
           </footer>
         </div>
       </div>

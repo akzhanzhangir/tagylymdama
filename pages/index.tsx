@@ -186,7 +186,7 @@ const Home: NextPage<HomeProps> = (props) => {
             );
           })}
           <footer className="m-6 text-black dark:text-white">
-            <Link href="https://github.com/akzhanzhangir"> my github. </Link> 
+            <Link href="https://github.com/djakish"> my github. </Link> 
           </footer>
         </div>
       </div>

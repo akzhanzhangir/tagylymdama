@@ -10,14 +10,14 @@ export default function Item(props: { job: Job }) {
         <div
             className={cn(
                 job.DeadlinePassed
-                    ? 'bg-gray-100 hover:bg-blue-500 dark:bg-gray-700'
-                    : 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:bg-blue-500',
-                'my-2 mx-5 rounded-xl p-1  transition-all duration-500 hover:text-blue-500 sm:mx-0'
+                    ? 'bg-gray-100 hover:bg-sky-400 dark:bg-gray-700'
+                    : 'bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:bg-sky-400',
+                'my-2 mx-5 rounded-xl p-1 transition-color ease-in-out   duration-500 hover:text-sky-400 sm:mx-0'
             )}
         >
             <Link href={job.Link}>
-                <div className='flex flex-wrap rounded-xl bg-white p-2  dark:bg-black '>
-                    <div className='w-full p-2 text-2xl font-bold  sm:w-1/2 sm:text-3xl'>
+                <div className='flex flex-wrap rounded-lg bg-white p-2 dark:bg-black '>
+                    <div className='w-full p-2 text-2xl font-bold sm:w-1/2 sm:text-3xl'>
                         {job.Name}
                     </div>
                     <div className='w-0 p-0 sm:w-1/2 sm:p-2'>

@@ -5,7 +5,7 @@ import { Martian_Mono } from 'next/font/google';
 const martian_mono = Martian_Mono({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Internships',
+    title: 'IT internshps Kazakhstan',
     description: 'IT internships in Kazakhstan',
 };
 

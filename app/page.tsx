@@ -1,7 +1,7 @@
 import { Job } from '@/lib/types';
 import { dateParse, isPastDeadline } from '@/lib/utils';
 import Link from 'next/link';
-import { DollarIcon, LocationIcon } from './components/Icons';
+import { DollarIcon } from './components/Icons';
 import Item from './components/Item';
 import { Extractor } from '@/lib/MD2Table';
 
@@ -38,11 +38,10 @@ async function getData() {
                 .map((val: string) => val.replace(/[\])}[{(]/g, '').trim())
                 .splice(0, 5),
             Deadline:
-                val[5] == '?'
-                    ? 'Invalid Date'
+            dateParse(val[5]).toString() === 'Invalid Date'
+                    ? '?'
                     : dateParse(val[5]).toLocaleDateString('de-DE'),
-            DeadlinePassed:
-                val[5] != '?' ? isPastDeadline(dateParse(val[5])) : false,
+            DeadlinePassed: isPastDeadline(dateParse(val[5])),
             Link: val[1].split('"')[1],
         };
         return job;
@@ -59,13 +58,13 @@ export default async function Home() {
             <div className='mx-auto max-w-2xl'>
                 <div className='flex flex-col pt-4 sm:pt-8'>
                     <h1 className='px-5 py-2 font-display text-3xl font-bold tracking-tight dark:text-white md:text-6xl'>
-                        Kazakhstan 🇰🇿
+                        Kazakhstan 
                         <br />
                         IT Internships
                     </h1>
                     <div className='px-5 text-sm tracking-tight dark:text-white md:text-xl'>
                         <p>
-                            Links are from{' '}
+                            Source: {' '}
                             <a
                                 className='text-blue-500'
                                 href='https://github.com/danabeknar/kazakhstan-it-internships'
@@ -80,7 +79,7 @@ export default async function Home() {
                             </span>
                             {' '}items aren&apos;t past the deadline.
                         </p>
-                        <p className='flex flex-row items-center gap-2'>
+                        <p className='flex flex-row items-center gap-2 mb-4'>
                             Dollar icon <DollarIcon /> means it is paid.
                         </p>
                     </div>

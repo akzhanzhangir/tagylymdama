@@ -9,10 +9,9 @@ export function dateParse(date: string): Date {
 
 export function isPastDeadline(deadline: Date): Boolean {
     const now = new Date();
-    if(deadline.toString() === 'Invalid Date') {
+    if (deadline.toString() === 'Invalid Date') {
         return false;
-    }
-    else {
+    } else {
         return deadline.getTime() < now.getTime();
     }
 }

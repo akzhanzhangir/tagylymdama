@@ -38,8 +38,8 @@ async function getData() {
                 .map((val: string) => val.replace(/[\])}[{(]/g, '').trim())
                 .splice(0, 5),
             Deadline:
-            dateParse(val[5]).toString() === 'Invalid Date'
-                    ? '?'
+                dateParse(val[5]).toString() === 'Invalid Date'
+                    ? 'no date :/'
                     : dateParse(val[5]).toLocaleDateString('de-DE'),
             DeadlinePassed: isPastDeadline(dateParse(val[5])),
             Link: val[1].split('"')[1],
@@ -56,15 +56,15 @@ export default async function Home() {
     return (
         <main>
             <div className='mx-auto max-w-2xl'>
-                <div className='flex flex-col pt-4 sm:pt-8'>
-                    <h1 className='px-5 py-2 font-display text-3xl font-bold tracking-tight dark:text-white md:text-6xl'>
-                        Kazakhstan 
+                <div className='flex flex-col p-4 sm:p-4'>
+                    <h1 className='px-4 py-2 text-3xl font-bold tracking-tight dark:text-white md:text-6xl'>
+                        Kazakhstan
                         <br />
                         IT Internships
                     </h1>
                     <div className='px-5 text-sm tracking-tight dark:text-white md:text-xl'>
                         <p>
-                            Source: {' '}
+                            Source:{' '}
                             <a
                                 className='text-blue-500'
                                 href='https://github.com/danabeknar/kazakhstan-it-internships'
@@ -76,8 +76,8 @@ export default async function Home() {
                         <p>
                             <span className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent'>
                                 HIGHLIGHTED
-                            </span>
-                            {' '}items aren&apos;t past the deadline.
+                            </span>{' '}
+                            items aren&apos;t past the deadline.
                         </p>
                         <p className='flex flex-row items-center gap-2 mb-4'>
                             Dollar icon <DollarIcon /> means it is paid.

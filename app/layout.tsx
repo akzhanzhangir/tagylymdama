@@ -16,7 +16,14 @@ export default function RootLayout({
 }) {
     return (
         <html lang='en'>
-            <body className={martian_mono.className + " scroll-smooth bg-white dark:bg-black"}>{children}</body>
+            <body
+                className={
+                    martian_mono.className +
+                    ' scroll-smooth bg-white dark:bg-black'
+                }
+            >
+                {children}
+            </body>
         </html>
     );
 }

@@ -17,18 +17,18 @@ export default function Item(props: { job: Job }) {
         >
             <Link href={job.Link}>
                 <div className='flex flex-wrap rounded-lg bg-white p-2 dark:bg-black '>
-                    <div className='w-full p-2 text-2xl font-bold sm:w-1/2 sm:text-3xl'>
+                    <div className='w-full sm:w-1/2 text-2xl sm:text-3xl p-2 font-bold'>
                         {job.Name}
                     </div>
                     <div className='w-0 p-0 sm:w-1/2 sm:p-2'>
                         <Tags items={job.Tags} />
                     </div>
-                    <div className='flex w-1/2 items-center gap-2 p-2  text-sm sm:text-base '>
+                    <div className='flex w-full sm:w-1/2 items-center gap-2 p-2 text-sm sm:text-base '>
                         <LocationIcon />{' '}
                         <span className='truncate'>{job.Location}</span>
                         {job.Paid ? <DollarIcon /> : <></>}
                     </div>
-                    <div className='w-1/2 p-2 text-right  text-sm sm:text-base'>
+                    <div className='w-1/2 p-2 sm:text-right text-sm sm:text-base'>
                         {job.Deadline}
                     </div>
                 </div>
